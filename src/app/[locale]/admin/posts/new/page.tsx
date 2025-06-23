@@ -1,9 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next-intl/client'; // For navigation after submit
+import { useRouter, Link } from '@/i18n/navigation'; // Updated imports
 import { useLocale, useTranslations } from 'next-intl';
-import Link from 'next-intl/link';
 
 interface PostFormState {
   title: string;

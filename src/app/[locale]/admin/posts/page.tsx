@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Link from 'next-intl/link'; // Use next-intl's Link for localized routing
+import { Link } from '@/i18n/navigation'; // Updated import
 import { useLocale, useTranslations } from 'next-intl';
 
 // Define a type for the Post data

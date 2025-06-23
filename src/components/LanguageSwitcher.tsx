@@ -1,7 +1,7 @@
 'use client';
 
 import {useLocale, useTranslations} from 'next-intl';
-import {useRouter, usePathname} from 'next-intl/navigation';
+import {useRouter, usePathname} from '@/i18n/navigation'; // Updated import
 import { ChangeEvent } from 'react';
 
 export default function LanguageSwitcher() {

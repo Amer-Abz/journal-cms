@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useState, FormEvent, ChangeEvent } from 'react';
-import { useRouter, usePathname } from 'next-intl/client'; // For navigation and getting path
+import { useRouter, Link } from '@/i18n/navigation'; // Updated imports
+// import { usePathname } from '@/i18n/navigation'; // If usePathname is needed, it would also come from here
 import { useLocale, useTranslations } from 'next-intl';
-import Link from 'next-intl/link';
 
 interface PostFormState {
   title: string;
