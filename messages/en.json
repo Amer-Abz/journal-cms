@@ -1,0 +1,54 @@
+{
+  "HomePage": {
+    "title": "Welcome to our CMS",
+    "description": "This is a basic example of a multi-lingual Next.js application."
+  },
+  "LanguageSwitcher": {
+    "changeTo": "Change to {language}"
+  },
+  "AdminPostsPage": {
+    "title": "Manage Posts",
+    "newPostLink": "Create New Post",
+    "loading": "Loading posts...",
+    "errorFetching": "Error fetching posts.",
+    "errorDeleting": "Error deleting post.",
+    "confirmDelete": "Are you sure you want to delete this post?",
+    "noPosts": "No posts found.",
+    "tableTitle": "Title",
+    "tableLanguage": "Language",
+    "tablePublished": "Published",
+    "tableCreatedAt": "Created At",
+    "tableActions": "Actions",
+    "actionEdit": "Edit",
+    "actionDelete": "Delete",
+    "publishedYes": "Yes",
+    "publishedNo": "No"
+  },
+  "NewPostPage": {
+    "title": "Create New Post",
+    "backLink": "Back to Posts",
+    "fieldTitle": "Title",
+    "fieldContent": "Content",
+    "fieldLanguage": "Language",
+    "fieldPublished": "Published",
+    "buttonSave": "Save Post",
+    "buttonSaving": "Saving...",
+    "errorCreating": "Error creating post. Please check the fields.",
+    "successCreating": "Post created successfully!"
+  },
+  "EditPostPage": {
+    "title": "Edit Post: {postTitle}",
+    "backLink": "Back to Posts",
+    "fieldTitle": "Title",
+    "fieldContent": "Content",
+    "fieldLanguage": "Language",
+    "languageEditNotice": "Language of the post cannot be changed here. Create a new post for a different language version.",
+    "fieldPublished": "Published",
+    "buttonSave": "Save Changes",
+    "buttonSaving": "Saving...",
+    "loadingPost": "Loading post data...",
+    "errorFetching": "Error fetching post data.",
+    "errorNotFound": "Post not found. It might have been deleted.",
+    "errorUpdating": "Error updating post. Please check the fields."
+  }
+}

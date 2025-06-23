@@ -1,0 +1,54 @@
+{
+  "HomePage": {
+    "title": "مرحباً بكم في نظام إدارة المحتوى الخاص بنا",
+    "description": "هذا مثال أساسي لتطبيق Next.js متعدد اللغات."
+  },
+  "LanguageSwitcher": {
+    "changeTo": "تغيير إلى {language}"
+  },
+  "AdminPostsPage": {
+    "title": "إدارة المقالات",
+    "newPostLink": "إنشاء مقال جديد",
+    "loading": "جاري تحميل المقالات...",
+    "errorFetching": "خطأ في جلب المقالات.",
+    "errorDeleting": "خطأ في حذف المقال.",
+    "confirmDelete": "هل أنت متأكد أنك تريد حذف هذا المقال؟",
+    "noPosts": "لم يتم العثور على مقالات.",
+    "tableTitle": "العنوان",
+    "tableLanguage": "اللغة",
+    "tablePublished": "منشور",
+    "tableCreatedAt": "تاريخ الإنشاء",
+    "tableActions": "الإجراءات",
+    "actionEdit": "تعديل",
+    "actionDelete": "حذف",
+    "publishedYes": "نعم",
+    "publishedNo": "لا"
+  },
+  "NewPostPage": {
+    "title": "إنشاء مقال جديد",
+    "backLink": "العودة إلى المقالات",
+    "fieldTitle": "العنوان",
+    "fieldContent": "المحتوى",
+    "fieldLanguage": "اللغة",
+    "fieldPublished": "منشور",
+    "buttonSave": "حفظ المقال",
+    "buttonSaving": "جاري الحفظ...",
+    "errorCreating": "خطأ في إنشاء المقال. يرجى التحقق من الحقول.",
+    "successCreating": "تم إنشاء المقال بنجاح!"
+  },
+  "EditPostPage": {
+    "title": "تعديل المقال: {postTitle}",
+    "backLink": "العودة إلى المقالات",
+    "fieldTitle": "العنوان",
+    "fieldContent": "المحتوى",
+    "fieldLanguage": "اللغة",
+    "languageEditNotice": "لا يمكن تغيير لغة المقال هنا. قم بإنشاء مقال جديد لنسخة بلغة مختلفة.",
+    "fieldPublished": "منشور",
+    "buttonSave": "حفظ التغييرات",
+    "buttonSaving": "جاري الحفظ...",
+    "loadingPost": "جاري تحميل بيانات المقال...",
+    "errorFetching": "خطأ في جلب بيانات المقال.",
+    "errorNotFound": "المقال غير موجود. ربما تم حذفه.",
+    "errorUpdating": "خطأ في تحديث المقال. يرجى التحقق من الحقول."
+  }
+}
