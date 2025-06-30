@@ -7,16 +7,16 @@ import '../globals.css'; // Adjusted path
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default async function LocaleLayout({
-  children,
-  params: {locale}
-}: {
+export default async function LocaleLayout(props: {
   children: React.ReactNode;
   params: {locale: string};
 }) {
+  const { children, params } = props;
+  const locale = params.locale; // Destructure inside
+
   // Providing all messages to the client
   // side is a simple way to get started
-  const messages = await getMessages();
+  const messages = await getMessages(); // getMessages should use the correct locale context
 
   return (
     <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
@@ -30,7 +30,8 @@ export default async function LocaleLayout({
 }
 
 // It's good practice to also define metadata generation for localized layouts
-export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
+export async function generateMetadata(props: { params: { locale: string } }) {
+  const locale = props.params.locale; // Destructure inside
   // You can use a translation file for this if needed
   const title = locale === 'ar' ? 'موقعي' : 'My Site';
   const description = locale === 'ar' ? 'وصف موقعي' : 'My site description';
