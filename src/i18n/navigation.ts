@@ -1,5 +1,5 @@
 import {
-  createLocalizedPathnamesNavigation
+  createNavigation // Corrected function name
 } from 'next-intl/navigation';
 
 export const locales = ['en', 'ar'] as const;
@@ -25,7 +25,7 @@ export const defaultLocale = 'en';
 // It should align with your middleware settings. Our middleware implies 'as-needed' or 'always'.
 
 export const { Link, redirect, usePathname, useRouter } =
-  createLocalizedPathnamesNavigation({
+  createNavigation({ // Corrected function name
     locales,
     // pathnames, // Uncomment if you have specific pathnames to localize
     localePrefix: undefined // Or 'as-needed', 'always'. `undefined` uses default.
