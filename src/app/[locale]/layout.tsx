@@ -16,7 +16,7 @@ export default async function LocaleLayout(props: {
 
   // Providing all messages to the client
   // side is a simple way to get started
-  const messages = await getMessages(); // getMessages should use the correct locale context
+  const messages = await getMessages({ locale }); // Explicitly pass locale
 
   return (
     <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
