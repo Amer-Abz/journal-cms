@@ -8,13 +8,13 @@ This document outlines the planned stages and features for the Next.js, Prisma, 
     *   [x] Create `ROADMAP.md` to track project phases. (Recreated)
     *   [x] Create `LOG.md` for detailed progress tracking. (To be recreated)
     *   [x] Initialize Next.js project (latest version, with TypeScript, ESLint, TailwindCSS, src/ dir, App Router).
-    *   [ ] Set up Internationalization (i18n) - English (default) & Arabic.
-    *   [ ] Install and configure Prisma.
-    *   [ ] Set up PostgreSQL database connection.
+    *   [~] Set up Internationalization (i18n) - English (default) & Arabic. (Basic `next-intl` setup complete, messages files exist)
+    *   [~] Install and configure Prisma. (Prisma client generated, `Post` model defined in schema)
+    *   [~] Set up PostgreSQL database connection. (Implied by Prisma setup with `DATABASE_URL` env var)
 2.  **Basic Content Management (Posts):**
-    *   [ ] Define `Post` schema (title, content, slug, published status, author, language).
-    *   [ ] Implement CRUD API endpoints for Posts.
-    *   [ ] Create basic UI for listing, creating, editing, and deleting Posts (supporting EN/AR).
+    *   [~] Define `Post` schema (title, content, slug, published status, author, language). (Current schema has `title`, `content`, `language`, `published`; missing `slug`, `author`)
+    *   [~] Implement CRUD API endpoints for Posts. (Core GET, POST, PUT, DELETE for posts exist; missing `author` association)
+    *   [ ] Verify/Implement UI for Post management (listing, creating, editing, deleting) supporting EN/AR. (Admin page structure exists, functionality to be verified)
 3.  **User Authentication:**
     *   [ ] Define `User` schema (email, password, name, role).
     *   [ ] Implement user registration and login functionality.
