@@ -31,7 +31,8 @@ export default async function LocaleLayout(props: {
 
 // It's good practice to also define metadata generation for localized layouts
 export async function generateMetadata(props: { params: { locale: string } }) {
-  const locale = props.params.locale; // Destructure inside
+  const metadataParams = props.params; // Access params first
+  const locale = metadataParams.locale; // Then destructure
   // You can use a translation file for this if needed
   const title = locale === 'ar' ? 'موقعي' : 'My Site';
   const description = locale === 'ar' ? 'وصف موقعي' : 'My site description';
