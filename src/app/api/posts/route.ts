@@ -8,6 +8,8 @@ const createPostSchema = z.object({
   content: z.string().optional(),
   language: z.enum(['en', 'ar'], { required_error: "Language must be 'en' or 'ar'" }),
   published: z.boolean().optional().default(false),
+  slug: z.string().min(1, "Slug is required"),
+  authorId: z.number().int().positive("Author ID must be a positive integer"),
 });
 
 export async function POST(request: NextRequest) {
@@ -19,7 +21,10 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ errors: validation.error.flatten().fieldErrors }, { status: 400 });
     }
 
-    const { title, content, language, published } = validation.data;
+    const { title, content, language, published, slug, authorId } = validation.data;
+
+    // TODO: Add server-side slug generation/validation if needed in future.
+    // For now, client must provide a unique slug for the given language.
 
     const post = await prisma.post.create({
       data: {
@@ -27,10 +32,16 @@ export async function POST(request: NextRequest) {
         content,
         language,
         published,
+        slug,
+        authorId,
       },
     });
     return NextResponse.json(post, { status: 201 });
-  } catch (error) {
+  } catch (error: any) {
+    // Check for unique constraint violation for slug + language
+    if (error.code === 'P2002' && error.meta?.target?.includes('language') && error.meta?.target?.includes('slug')) {
+      return NextResponse.json({ message: "A post with this slug already exists in the selected language." }, { status: 409 });
+    }
     console.error("Error creating post:", error);
     return NextResponse.json({ message: "Error creating post" }, { status: 500 });
   }

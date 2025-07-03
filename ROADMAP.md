@@ -13,8 +13,8 @@ This document outlines the planned stages and features for the Next.js, Prisma, 
     *   [~] Set up PostgreSQL database connection. (Implied by Prisma setup with `DATABASE_URL` env var. Migration to be run manually.)
 2.  **Basic Content Management (Posts):**
     *   [x] Define `Post` schema (title, content, slug, published status, author, language). (Schema updated with `slug` and `author` relation. Migration to be run manually.)
-    *   [~] Implement CRUD API endpoints for Posts. (Core GET, POST, PUT, DELETE for posts exist; missing `author` association, and APIs need update for `slug` and `author`)
-    *   [ ] Verify/Implement UI for Post management (listing, creating, editing, deleting) supporting EN/AR. (Admin page structure exists, functionality to be verified)
+    *   [~] Implement CRUD API endpoints for Posts. (Core GET, POST, PUT, DELETE for posts exist. POST and PUT updated to handle `slug` and `authorId`. `author` association now established. GET endpoints may need updates to expose/filter by author.)
+    *   [ ] Verify/Implement UI for Post management (listing, creating, editing, deleting) supporting EN/AR. (Admin page structure exists, functionality to be verified, will need to incorporate `slug` and `authorId`)
 3.  **User Authentication:**
     *   [x] Define `User` schema (email, password, name, role). (Schema defined. Migration to be run manually.)
     *   [ ] Implement user registration and login functionality.

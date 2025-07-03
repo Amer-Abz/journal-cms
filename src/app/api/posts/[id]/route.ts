@@ -10,6 +10,9 @@ const updatePostSchema = z.object({
   // one would create a new post for a different language.
   // language: z.enum(['en', 'ar']).optional(),
   published: z.boolean().optional(),
+  slug: z.string().min(1, "Slug cannot be empty").optional(),
+  // authorId should generally not be changed after creation.
+  // If a change of author is needed, it should be a deliberate, separate admin action.
 });
 
 export async function GET(
@@ -58,15 +61,26 @@ export async function PUT(
         return NextResponse.json({ message: "No fields to update" }, { status: 400 });
     }
 
+    const { ...updateData } = validation.data;
+
+    // Ensure authorId is not part of the update payload
+    if ('authorId' in updateData) {
+      return NextResponse.json({ message: "Author ID cannot be changed." }, { status: 400 });
+    }
+
     const updatedPost = await prisma.post.update({
       where: { id },
-      data: validation.data,
+      data: updateData,
     });
     return NextResponse.json(updatedPost);
-  } catch (error) {
+  } catch (error: any) {
     // Check for Prisma's record not found error
-    if (error instanceof Error && 'code' in error && error.code === 'P2025') {
-        return NextResponse.json({ message: "Post not found" }, { status: 404 });
+    if (error.code === 'P2025') {
+      return NextResponse.json({ message: "Post not found" }, { status: 404 });
+    }
+    // Check for unique constraint violation for slug + language
+    if (error.code === 'P2002' && error.meta?.target?.includes('language') && error.meta?.target?.includes('slug')) {
+      return NextResponse.json({ message: "A post with this slug already exists in the selected language." }, { status: 409 });
     }
     console.error(`Error updating post with ID ${params.id}:`, error);
     return NextResponse.json({ message: "Error updating post" }, { status: 500 });
