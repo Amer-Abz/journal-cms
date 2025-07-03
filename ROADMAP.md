@@ -10,13 +10,13 @@ This document outlines the planned stages and features for the Next.js, Prisma, 
     *   [x] Initialize Next.js project (latest version, with TypeScript, ESLint, TailwindCSS, src/ dir, App Router).
     *   [~] Set up Internationalization (i18n) - English (default) & Arabic. (Basic `next-intl` setup complete, messages files exist)
     *   [~] Install and configure Prisma. (Prisma client generated, `Post` model defined in schema)
-    *   [~] Set up PostgreSQL database connection. (Implied by Prisma setup with `DATABASE_URL` env var)
+    *   [~] Set up PostgreSQL database connection. (Implied by Prisma setup with `DATABASE_URL` env var. Migration to be run manually.)
 2.  **Basic Content Management (Posts):**
-    *   [~] Define `Post` schema (title, content, slug, published status, author, language). (Current schema has `title`, `content`, `language`, `published`; missing `slug`, `author`)
-    *   [~] Implement CRUD API endpoints for Posts. (Core GET, POST, PUT, DELETE for posts exist; missing `author` association)
+    *   [x] Define `Post` schema (title, content, slug, published status, author, language). (Schema updated with `slug` and `author` relation. Migration to be run manually.)
+    *   [~] Implement CRUD API endpoints for Posts. (Core GET, POST, PUT, DELETE for posts exist; missing `author` association, and APIs need update for `slug` and `author`)
     *   [ ] Verify/Implement UI for Post management (listing, creating, editing, deleting) supporting EN/AR. (Admin page structure exists, functionality to be verified)
 3.  **User Authentication:**
-    *   [ ] Define `User` schema (email, password, name, role).
+    *   [x] Define `User` schema (email, password, name, role). (Schema defined. Migration to be run manually.)
     *   [ ] Implement user registration and login functionality.
     *   [ ] Protect CMS routes/actions based on authentication.
 
