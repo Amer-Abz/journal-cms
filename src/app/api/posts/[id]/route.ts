@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { z } from 'zod';
+import { generateSlug } from '@/lib/utils';
 
 // Zod schema for post update (all fields optional)
 const updatePostSchema = z.object({
@@ -58,9 +59,15 @@ export async function PUT(
         return NextResponse.json({ message: "No fields to update" }, { status: 400 });
     }
 
+    const data: { title?: string; content?: string; published?: boolean; slug?: string } = validation.data;
+
+    if (validation.data.title) {
+        data.slug = generateSlug(validation.data.title);
+    }
+
     const updatedPost = await prisma.post.update({
       where: { id },
-      data: validation.data,
+      data: data,
     });
     return NextResponse.json(updatedPost);
   } catch (error) {

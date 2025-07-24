@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { z } from 'zod';
+import { generateSlug } from '@/lib/utils';
 
 // Zod schema for post creation
 const createPostSchema = z.object({
@@ -8,6 +9,7 @@ const createPostSchema = z.object({
   content: z.string().optional(),
   language: z.enum(['en', 'ar'], { required_error: "Language must be 'en' or 'ar'" }),
   published: z.boolean().optional().default(false),
+  authorId: z.number(),
 });
 
 export async function POST(request: NextRequest) {
@@ -33,14 +35,17 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ errors: validation.error.flatten().fieldErrors }, { status: 400 });
       }
 
-      const { title, content, language, published } = validation.data;
+      const { title, content, language, published, authorId } = validation.data;
+      const slug = generateSlug(title);
 
       const post = await prisma.post.create({
         data: {
           title,
+          slug,
           content,
           language,
           published,
+          authorId,
         },
       });
       return NextResponse.json(post, { status: 201 });
