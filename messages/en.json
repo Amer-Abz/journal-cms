@@ -50,5 +50,20 @@
     "errorFetching": "Error fetching post data.",
     "errorNotFound": "Post not found. It might have been deleted.",
     "errorUpdating": "Error updating post. Please check the fields."
+  },
+  "LoginPage": {
+    "title": "Login",
+    "fieldEmail": "Email",
+    "fieldPassword": "Password",
+    "buttonLogin": "Login",
+    "invalidCredentials": "Invalid email or password."
+  },
+  "RegisterPage": {
+    "title": "Register",
+    "fieldName": "Name",
+    "fieldEmail": "Email",
+    "fieldPassword": "Password",
+    "buttonRegister": "Register",
+    "registrationFailed": "Registration failed. Please try again."
   }
 }

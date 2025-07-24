@@ -50,5 +50,20 @@
     "errorFetching": "خطأ في جلب بيانات المقال.",
     "errorNotFound": "المقال غير موجود. ربما تم حذفه.",
     "errorUpdating": "خطأ في تحديث المقال. يرجى التحقق من الحقول."
+  },
+  "LoginPage": {
+    "title": "تسجيل الدخول",
+    "fieldEmail": "البريد الإلكتروني",
+    "fieldPassword": "كلمة المرور",
+    "buttonLogin": "تسجيل الدخول",
+    "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة."
+  },
+  "RegisterPage": {
+    "title": "تسجيل",
+    "fieldName": "الاسم",
+    "fieldEmail": "البريد الإلكتروني",
+    "fieldPassword": "كلمة المرور",
+    "buttonRegister": "تسجيل",
+    "registrationFailed": "فشل التسجيل. يرجى المحاولة مرة أخرى."
   }
 }
