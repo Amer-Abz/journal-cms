@@ -13,45 +13,40 @@ const createPostSchema = z.object({
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const validation = createPostSchema.safeParse(body);
 
-    if (!validation.success) {
-      return NextResponse.json({ errors: validation.error.flatten().fieldErrors }, { status: 400 });
+    // Distinguish between creating a new post and fetching posts
+    if (body.action === 'fetch') {
+      const { searchParams } = new URL(request.url);
+      const language = searchParams.get('lang');
+      const whereClause = language ? { language } : {};
+      const posts = await prisma.post.findMany({
+        where: whereClause,
+        orderBy: {
+          createdAt: 'desc',
+        },
+      });
+      return NextResponse.json(posts);
+    } else {
+      const validation = createPostSchema.safeParse(body);
+
+      if (!validation.success) {
+        return NextResponse.json({ errors: validation.error.flatten().fieldErrors }, { status: 400 });
+      }
+
+      const { title, content, language, published } = validation.data;
+
+      const post = await prisma.post.create({
+        data: {
+          title,
+          content,
+          language,
+          published,
+        },
+      });
+      return NextResponse.json(post, { status: 201 });
     }
-
-    const { title, content, language, published } = validation.data;
-
-    const post = await prisma.post.create({
-      data: {
-        title,
-        content,
-        language,
-        published,
-      },
-    });
-    return NextResponse.json(post, { status: 201 });
   } catch (error) {
-    console.error("Error creating post:", error);
-    return NextResponse.json({ message: "Error creating post" }, { status: 500 });
-  }
-}
-
-export async function GET(request: NextRequest) {
-  try {
-    const { searchParams } = new URL(request.url);
-    const language = searchParams.get('lang');
-
-    const whereClause = language ? { language } : {};
-
-    const posts = await prisma.post.findMany({
-      where: whereClause,
-      orderBy: {
-        createdAt: 'desc',
-      },
-    });
-    return NextResponse.json(posts);
-  } catch (error) {
-    console.error("Error fetching posts:", error);
-    return NextResponse.json({ message: "Error fetching posts" }, { status: 500 });
+    console.error("Error in POST /api/posts:", error);
+    return NextResponse.json({ message: "Error processing request" }, { status: 500 });
   }
 }
