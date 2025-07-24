@@ -51,7 +51,7 @@ export default function NewPostPage() {
       const response = await fetch('/api/posts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formState),
+        body: JSON.stringify({ ...formState, authorId: 1 }), // Hardcoded authorId
       });
 
       if (!response.ok) {

@@ -26,7 +26,13 @@ export default function AdminPostsPage() {
       setError(null);
       try {
         // Fetch posts for the current locale by default
-        const response = await fetch(`/api/posts?lang=${locale}`);
+        const response = await fetch(`/api/posts?lang=${locale}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ action: 'fetch' }),
+        });
         if (!response.ok) {
           throw new Error(t('errorFetching'));
         }

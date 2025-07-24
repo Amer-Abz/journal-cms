@@ -50,7 +50,12 @@ export default function EditPostPage({ params }: { params: { id: string; locale:
       setIsFetching(true);
       setFetchError(null);
       try {
-        const response = await fetch(`/api/posts/${postId}`);
+        const response = await fetch(`/api/posts/${postId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
         if (!response.ok) {
           if(response.status === 404) throw new Error(t('errorNotFound'));
           throw new Error(t('errorFetching'));
