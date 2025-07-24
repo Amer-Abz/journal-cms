@@ -27,6 +27,8 @@ model Post {
   updatedAt DateTime @updatedAt
 
   @@index([language])
+  categories Category[]
+  tags       Tag[]
 }
 
 model User {
@@ -41,4 +43,16 @@ model User {
 enum Role {
   USER
   ADMIN
+}
+
+model Category {
+  id    Int     @id @default(autoincrement())
+  name  String  @unique
+  posts Post[]
+}
+
+model Tag {
+  id    Int     @id @default(autoincrement())
+  name  String  @unique
+  posts Post[]
 }
