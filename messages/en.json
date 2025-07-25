@@ -65,5 +65,65 @@
     "fieldPassword": "Password",
     "buttonRegister": "Register",
     "registrationFailed": "Registration failed. Please try again."
+  },
+  "AdminCategoriesPage": {
+    "title": "Manage Categories",
+    "newCategoryLink": "Create New Category",
+    "loading": "Loading categories...",
+    "errorFetching": "Error fetching categories.",
+    "errorDeleting": "Error deleting category.",
+    "confirmDelete": "Are you sure you want to delete this category?",
+    "noCategories": "No categories found.",
+    "tableName": "Name",
+    "tableActions": "Actions",
+    "actionEdit": "Edit",
+    "actionDelete": "Delete"
+  },
+  "NewCategoryPage": {
+    "title": "Create New Category",
+    "backLink": "Back to Categories",
+    "fieldName": "Name",
+    "buttonSave": "Save Category",
+    "buttonSaving": "Saving..."
+  },
+  "EditCategoryPage": {
+    "title": "Edit Category: {categoryName}",
+    "backLink": "Back to Categories",
+    "fieldName": "Name",
+    "buttonSave": "Save Changes",
+    "buttonSaving": "Saving...",
+    "loadingCategory": "Loading category data...",
+    "errorFetching": "Error fetching category data.",
+    "errorNotFound": "Category not found. It might have been deleted."
+  },
+  "AdminTagsPage": {
+    "title": "Manage Tags",
+    "newTagLink": "Create New Tag",
+    "loading": "Loading tags...",
+    "errorFetching": "Error fetching tags.",
+    "errorDeleting": "Error deleting tag.",
+    "confirmDelete": "Are you sure you want to delete this tag?",
+    "noTags": "No tags found.",
+    "tableName": "Name",
+    "tableActions": "Actions",
+    "actionEdit": "Edit",
+    "actionDelete": "Delete"
+  },
+  "NewTagPage": {
+    "title": "Create New Tag",
+    "backLink": "Back to Tags",
+    "fieldName": "Name",
+    "buttonSave": "Save Tag",
+    "buttonSaving": "Saving..."
+  },
+  "EditTagPage": {
+    "title": "Edit Tag: {tagName}",
+    "backLink": "Back to Tags",
+    "fieldName": "Name",
+    "buttonSave": "Save Changes",
+    "buttonSaving": "Saving...",
+    "loadingTag": "Loading tag data...",
+    "errorFetching": "Error fetching tag data.",
+    "errorNotFound": "Tag not found. It might have been deleted."
   }
 }

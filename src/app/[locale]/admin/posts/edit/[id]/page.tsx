@@ -11,11 +11,15 @@ interface PostFormState {
   // Language is usually not changed on edit, it defines the record itself
   // language: string;
   published: boolean;
+  categoryIds: number[];
+  tagIds: number[];
 }
 
 interface Post extends PostFormState {
   id: number;
   language: string; // Still need this to display, even if not editable
+  categories: { id: number }[];
+  tags: { id: number }[];
 }
 
 interface ApiError {
@@ -35,8 +39,12 @@ export default function EditPostPage({ params }: { params: { id: string; locale:
     title: '',
     content: '',
     published: false,
+    categoryIds: [],
+    tagIds: [],
   });
   const [originalLanguage, setOriginalLanguage] = useState<string>('');
+  const [categories, setCategories] = useState<{ id: number; name: string }[]>([]);
+  const [tags, setTags] = useState<{ id: number; name: string }[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isFetching, setIsFetching] = useState(true);
   const [error, setError] = useState<ApiError | null>(null);
@@ -46,27 +54,40 @@ export default function EditPostPage({ params }: { params: { id: string; locale:
   useEffect(() => {
     if (!postId) return;
 
-    const fetchPost = async () => {
+    const fetchPostAndTaxonomies = async () => {
       setIsFetching(true);
       setFetchError(null);
       try {
-        const response = await fetch(`/api/posts/${postId}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-        if (!response.ok) {
-          if(response.status === 404) throw new Error(t('errorNotFound'));
+        const [postRes, catRes, tagRes] = await Promise.all([
+            fetch(`/api/posts/${postId}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+            }),
+            fetch('/api/categories'),
+            fetch('/api/tags'),
+        ]);
+
+        if (!postRes.ok) {
+          if(postRes.status === 404) throw new Error(t('errorNotFound'));
           throw new Error(t('errorFetching'));
         }
-        const data: Post = await response.json();
+
+        const [postData, catData, tagData] = await Promise.all([
+            postRes.json(),
+            catRes.json(),
+            tagRes.json(),
+        ]);
+
         setFormState({
-          title: data.title,
-          content: data.content || '', // Ensure content is not null
-          published: data.published,
+          title: postData.title,
+          content: postData.content || '',
+          published: postData.published,
+          categoryIds: postData.categories.map((c: any) => c.id),
+          tagIds: postData.tags.map((t: any) => t.id),
         });
-        setOriginalLanguage(data.language); // Store original language
+        setOriginalLanguage(postData.language);
+        setCategories(catData);
+        setTags(tagData);
       } catch (err) {
         setFetchError(err instanceof Error ? err.message : t('errorFetching'));
       } finally {
@@ -74,7 +95,7 @@ export default function EditPostPage({ params }: { params: { id: string; locale:
       }
     };
 
-    fetchPost();
+    fetchPostAndTaxonomies();
   }, [postId, t]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -175,6 +196,58 @@ export default function EditPostPage({ params }: { params: { id: string; locale:
           <label htmlFor="published" className="ml-2 block text-sm text-gray-900">{t('fieldPublished')}</label>
         </div>
         {error?.errors?.published && <p className="text-red-500 text-xs mt-1">{error.errors.published.join(', ')}</p>}
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Categories</label>
+          <div className="mt-2 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+            {categories.map(category => (
+              <label key={category.id} className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  value={category.id}
+                  checked={formState.categoryIds.includes(category.id)}
+                  onChange={e => {
+                    const categoryId = parseInt(e.target.value);
+                    setFormState(prev => ({
+                      ...prev,
+                      categoryIds: e.target.checked
+                        ? [...prev.categoryIds, categoryId]
+                        : prev.categoryIds.filter(id => id !== categoryId)
+                    }));
+                  }}
+                  className="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                />
+                <span>{category.name}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Tags</label>
+          <div className="mt-2 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+            {tags.map(tag => (
+              <label key={tag.id} className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  value={tag.id}
+                  checked={formState.tagIds.includes(tag.id)}
+                  onChange={e => {
+                    const tagId = parseInt(e.target.value);
+                    setFormState(prev => ({
+                      ...prev,
+                      tagIds: e.target.checked
+                        ? [...prev.tagIds, tagId]
+                        : prev.tagIds.filter(id => id !== tagId)
+                    }));
+                  }}
+                  className="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                />
+                <span>{tag.name}</span>
+              </label>
+            ))}
+          </div>
+        </div>
 
 
         {error?.message && !error.errors && <p className="text-red-500 text-sm">{error.message}</p>}

@@ -65,5 +65,65 @@
     "fieldPassword": "كلمة المرور",
     "buttonRegister": "تسجيل",
     "registrationFailed": "فشل التسجيل. يرجى المحاولة مرة أخرى."
+  },
+  "AdminCategoriesPage": {
+    "title": "إدارة الفئات",
+    "newCategoryLink": "إنشاء فئة جديدة",
+    "loading": "جاري تحميل الفئات...",
+    "errorFetching": "خطأ في جلب الفئات.",
+    "errorDeleting": "خطأ في حذف الفئة.",
+    "confirmDelete": "هل أنت متأكد أنك تريد حذف هذه الفئة؟",
+    "noCategories": "لم يتم العثور على فئات.",
+    "tableName": "الاسم",
+    "tableActions": "الإجراءات",
+    "actionEdit": "تعديل",
+    "actionDelete": "حذف"
+  },
+  "NewCategoryPage": {
+    "title": "إنشاء فئة جديدة",
+    "backLink": "العودة إلى الفئات",
+    "fieldName": "الاسم",
+    "buttonSave": "حفظ الفئة",
+    "buttonSaving": "جاري الحفظ..."
+  },
+  "EditCategoryPage": {
+    "title": "تعديل الفئة: {categoryName}",
+    "backLink": "العودة إلى الفئات",
+    "fieldName": "الاسم",
+    "buttonSave": "حفظ التغييرات",
+    "buttonSaving": "جاري الحفظ...",
+    "loadingCategory": "جاري تحميل بيانات الفئة...",
+    "errorFetching": "خطأ في جلب بيانات الفئة.",
+    "errorNotFound": "الفئة غير موجودة. ربما تم حذفها."
+  },
+  "AdminTagsPage": {
+    "title": "إدارة الوسوم",
+    "newTagLink": "إنشاء وسم جديد",
+    "loading": "جاري تحميل الوسوم...",
+    "errorFetching": "خطأ في جلب الوسوم.",
+    "errorDeleting": "خطأ في حذف الوسم.",
+    "confirmDelete": "هل أنت متأكد أنك تريد حذف هذا الوسم؟",
+    "noTags": "لم يتم العثور على وسوم.",
+    "tableName": "الاسم",
+    "tableActions": "الإجراءات",
+    "actionEdit": "تعديل",
+    "actionDelete": "حذف"
+  },
+  "NewTagPage": {
+    "title": "إنشاء وسم جديد",
+    "backLink": "العودة إلى الوسوم",
+    "fieldName": "الاسم",
+    "buttonSave": "حفظ الوسم",
+    "buttonSaving": "جاري الحفظ..."
+  },
+  "EditTagPage": {
+    "title": "تعديل الوسم: {tagName}",
+    "backLink": "العودة إلى الوسوم",
+    "fieldName": "الاسم",
+    "buttonSave": "حفظ التغييرات",
+    "buttonSaving": "جاري الحفظ...",
+    "loadingTag": "جاري تحميل بيانات الوسم...",
+    "errorFetching": "خطأ في جلب بيانات الوسم.",
+    "errorNotFound": "الوسم غير موجود. ربما تم حذفه."
   }
 }
