@@ -22,7 +22,27 @@ export async function POST(request: NextRequest) {
     if (body.action === 'fetch') {
       const { searchParams } = new URL(request.url);
       const language = searchParams.get('lang');
-      const whereClause = language ? { language } : {};
+      const categoryId = searchParams.get('categoryId');
+      const tagId = searchParams.get('tagId');
+
+      const whereClause: any = language ? { language } : {};
+
+      if (categoryId) {
+        whereClause.categories = {
+          some: {
+            id: parseInt(categoryId),
+          },
+        };
+      }
+
+      if (tagId) {
+        whereClause.tags = {
+          some: {
+            id: parseInt(tagId),
+          },
+        };
+      }
+
       const posts = await prisma.post.findMany({
         where: whereClause,
         orderBy: {
