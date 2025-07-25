@@ -10,6 +10,8 @@ const createPostSchema = z.object({
   language: z.enum(['en', 'ar'], { required_error: "Language must be 'en' or 'ar'" }),
   published: z.boolean().optional().default(false),
   authorId: z.number(),
+  categoryIds: z.array(z.number()).optional(),
+  tagIds: z.array(z.number()).optional(),
 });
 
 export async function POST(request: NextRequest) {
@@ -35,7 +37,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ errors: validation.error.flatten().fieldErrors }, { status: 400 });
       }
 
-      const { title, content, language, published, authorId } = validation.data;
+      const { title, content, language, published, authorId, categoryIds, tagIds } = validation.data;
       const slug = generateSlug(title);
 
       const post = await prisma.post.create({
@@ -46,6 +48,12 @@ export async function POST(request: NextRequest) {
           language,
           published,
           authorId,
+          categories: {
+            connect: categoryIds?.map(id => ({ id })),
+          },
+          tags: {
+            connect: tagIds?.map(id => ({ id })),
+          },
         },
       });
       return NextResponse.json(post, { status: 201 });

@@ -11,6 +11,8 @@ const updatePostSchema = z.object({
   // one would create a new post for a different language.
   // language: z.enum(['en', 'ar']).optional(),
   published: z.boolean().optional(),
+  categoryIds: z.array(z.number()).optional(),
+  tagIds: z.array(z.number()).optional(),
 });
 
 export async function POST(
@@ -59,10 +61,24 @@ export async function PUT(
         return NextResponse.json({ message: "No fields to update" }, { status: 400 });
     }
 
-    const data: { title?: string; content?: string; published?: boolean; slug?: string } = validation.data;
+    const { title, content, published, categoryIds, tagIds } = validation.data;
 
-    if (validation.data.title) {
-        data.slug = generateSlug(validation.data.title);
+    const data: { title?: string; content?: string; published?: boolean; slug?: string, categories?: any, tags?: any } = { title, content, published };
+
+    if (title) {
+        data.slug = generateSlug(title);
+    }
+
+    if (categoryIds) {
+      data.categories = {
+        set: categoryIds.map(id => ({ id })),
+      };
+    }
+
+    if (tagIds) {
+      data.tags = {
+        set: tagIds.map(id => ({ id })),
+      };
     }
 
     const updatedPost = await prisma.post.update({
