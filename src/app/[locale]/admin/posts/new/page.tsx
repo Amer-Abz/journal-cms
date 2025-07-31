@@ -1,12 +1,14 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter, Link } from '@/i18n/navigation'; // Updated imports
 import { useLocale, useTranslations } from 'next-intl';
+import ImageUpload from '@/components/ImageUpload';
 
 interface PostFormState {
   title: string;
   content: string;
+  featuredImage: string;
   language: string; // Should default to current locale
   published: boolean;
   categoryIds: number[];
@@ -26,6 +28,7 @@ export default function NewPostPage() {
   const [formState, setFormState] = useState<PostFormState>({
     title: '',
     content: '',
+    featuredImage: '',
     language: locale, // Default to current viewing language
     published: false,
     categoryIds: [],
@@ -131,6 +134,8 @@ export default function NewPostPage() {
           />
           {error?.errors?.content && <p className="text-red-500 text-xs mt-1">{error.errors.content.join(', ')}</p>}
         </div>
+
+        <ImageUpload onUpload={(filepath) => setFormState(prev => ({ ...prev, featuredImage: filepath }))} />
 
         <div>
           <label htmlFor="language" className="block text-sm font-medium text-gray-700">{t('fieldLanguage')}</label>

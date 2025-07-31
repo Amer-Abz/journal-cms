@@ -26,7 +26,7 @@ This document outlines the planned stages and features for the Next.js, Prisma, 
     *   [x] Define `Category` and `Tag` schemas (with i18n for names).
     *   [x] Associate Posts with Categories and Tags.
     *   [x] Implement UI for managing Categories and Tags.
-    *   [ ] Filter posts by Category/Tag.
+    *   [x] Filter posts by Category/Tag.
 2.  **Media Library:**
     *   [ ] Basic image upload functionality.
     *   [ ] Associate images with Posts.

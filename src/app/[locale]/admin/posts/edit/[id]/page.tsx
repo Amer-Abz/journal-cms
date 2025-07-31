@@ -5,9 +5,12 @@ import { useRouter, Link } from '@/i18n/navigation'; // Updated imports
 // import { usePathname } from '@/i18n/navigation'; // If usePathname is needed, it would also come from here
 import { useLocale, useTranslations } from 'next-intl';
 
+import ImageUpload from '@/components/ImageUpload';
+
 interface PostFormState {
   title: string;
   content: string;
+  featuredImage: string;
   // Language is usually not changed on edit, it defines the record itself
   // language: string;
   published: boolean;
@@ -38,6 +41,7 @@ export default function EditPostPage({ params }: { params: { id: string; locale:
   const [formState, setFormState] = useState<PostFormState>({
     title: '',
     content: '',
+    featuredImage: '',
     published: false,
     categoryIds: [],
     tagIds: [],
@@ -81,6 +85,7 @@ export default function EditPostPage({ params }: { params: { id: string; locale:
         setFormState({
           title: postData.title,
           content: postData.content || '',
+          featuredImage: postData.featuredImage || '',
           published: postData.published,
           categoryIds: postData.categories.map((c: any) => c.id),
           tagIds: postData.tags.map((t: any) => t.id),
@@ -175,6 +180,9 @@ export default function EditPostPage({ params }: { params: { id: string; locale:
           />
           {error?.errors?.content && <p className="text-red-500 text-xs mt-1">{error.errors.content.join(', ')}</p>}
         </div>
+
+        <ImageUpload onUpload={(filepath) => setFormState(prev => ({ ...prev, featuredImage: filepath }))} />
+        {formState.featuredImage && <img src={formState.featuredImage} alt="Featured image" className="w-full h-auto" />}
 
         <div>
             <p className="block text-sm font-medium text-gray-700">

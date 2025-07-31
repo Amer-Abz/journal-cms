@@ -19,6 +19,7 @@ model Post {
   title     String
   slug      String   @unique
   content   String?
+  featuredImage String?
   language  String   // To store language code e.g., "en", "ar"
   published Boolean  @default(false)
   author    User     @relation(fields: [authorId], references: [id])
