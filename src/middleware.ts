@@ -35,7 +35,7 @@ export default function middleware(req: NextRequest) {
   );
   const isPublicPage = publicPathnameRegex.test(pathname);
 
-  if (pathname === '/en' || pathname === '/ar') {
+  if (pathname === '/' || pathname === '/en' || pathname === '/ar') {
     return NextResponse.redirect(new URL('/login', req.url));
   }
 
