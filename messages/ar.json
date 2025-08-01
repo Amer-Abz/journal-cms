@@ -1,7 +1,7 @@
 {
-  "HomePage": {
-    "title": "مرحباً بكم في نظام إدارة المحتوى الخاص بنا",
-    "description": "هذا مثال أساسي لتطبيق Next.js متعدد اللغات."
+  "DashboardPage": {
+    "title": "لوحة التحكم",
+    "welcomeMessage": "مرحباً بك في لوحة التحكم الخاصة بك!"
   },
   "LanguageSwitcher": {
     "changeTo": "تغيير إلى {language}"

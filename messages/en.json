@@ -1,7 +1,7 @@
 {
-  "HomePage": {
-    "title": "Welcome to our CMS",
-    "description": "This is a basic example of a multi-lingual Next.js application."
+  "DashboardPage": {
+    "title": "Dashboard",
+    "welcomeMessage": "Welcome to your dashboard!"
   },
   "LanguageSwitcher": {
     "changeTo": "Change to {language}"

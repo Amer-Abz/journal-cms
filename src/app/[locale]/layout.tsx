@@ -1,6 +1,7 @@
 import {NextIntlClientProvider} from 'next-intl';
 import {getMessages} from 'next-intl/server';
 import { Inter } from "next/font/google"; // Assuming this is still wanted from default setup
+import Providers from '@/components/Providers'; // Import the new Providers component
 
 // If you have a global CSS file, import it here.
 import '../globals.css'; // Adjusted path
@@ -21,9 +22,11 @@ export default async function LocaleLayout(props: {
   return (
     <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <body className={inter.className}>
-        <NextIntlClientProvider messages={messages}>
-          {children}
-        </NextIntlClientProvider>
+        <Providers>
+          <NextIntlClientProvider messages={messages}>
+            {children}
+          </NextIntlClientProvider>
+        </Providers>
       </body>
     </html>
   );
