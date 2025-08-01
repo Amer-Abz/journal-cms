@@ -55,7 +55,7 @@ This document outlines the planned stages and features for the Next.js, Prisma, 
 ## Phase 4: Deployment & Maintenance
 
 1.  **Deployment:**
-    *   [ ] Prepare for deployment (e.g., Vercel, Docker).
+    *   [x] Prepare for deployment (e.g., Vercel, Docker).
     *   [ ] Set up production database.
 2.  **Testing:**
     *   [ ] Implement unit and integration tests, including i18n aspects.
