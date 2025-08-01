@@ -6,6 +6,7 @@ import { useRouter, Link } from '@/i18n/navigation'; // Updated imports
 import { useLocale, useTranslations } from 'next-intl';
 
 import ImageUpload from '@/components/ImageUpload';
+import RichTextEditor from '@/components/RichTextEditor';
 
 interface PostFormState {
   title: string;
@@ -170,13 +171,9 @@ export default function EditPostPage({ params }: { params: { id: string; locale:
 
         <div>
           <label htmlFor="content" className="block text-sm font-medium text-gray-700">{t('fieldContent')}</label>
-          <textarea
-            name="content"
-            id="content"
+          <RichTextEditor
             value={formState.content}
-            onChange={handleChange}
-            rows={6}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            onChange={(data) => setFormState(prev => ({ ...prev, content: data }))}
           />
           {error?.errors?.content && <p className="text-red-500 text-xs mt-1">{error.errors.content.join(', ')}</p>}
         </div>

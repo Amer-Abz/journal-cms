@@ -41,9 +41,9 @@ This document outlines the planned stages and features for the Next.js, Prisma, 
 ## Phase 3: Advanced Features & Polish
 
 1.  **Custom Post Types:**
-    *   [ ] Allow creation and management of custom content types beyond "Posts" (with i18n).
+    *   [x] Allow creation and management of custom content types beyond "Posts" (with i18n).
 2.  **Advanced Editor:**
-    *   [ ] Integrate a rich text editor (e.g., TipTap, Editor.js) with i18n support (RTL for Arabic).
+    *   [x] Integrate a rich text editor (e.g., TipTap, Editor.js) with i18n support (RTL for Arabic).
 3.  **SEO Features:**
     *   [ ] Meta tags management for posts/pages (i18n).
     *   [ ] Sitemap generation (multi-lingual).
