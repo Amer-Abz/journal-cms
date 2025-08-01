@@ -28,7 +28,7 @@ export default function DashboardPage() {
           <p className="text-gray-600">Welcome, <span className="font-semibold">{session?.user?.name || session?.user?.email}</span>!</p>
           <p className="text-gray-600">Your role is: <span className="font-semibold text-indigo-600">{userRole}</span></p>
           <button
-            onClick={() => signOut({ callbackUrl: '/login' })}
+            onClick={() => signOut({ callbackUrl: '/' })}
             className="mt-4 w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition-colors"
           >
             Logout
