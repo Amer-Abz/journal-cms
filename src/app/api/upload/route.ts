@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import formidable from 'formidable';
-import fs from 'fs/promises';
+import { promises as fs } from 'fs';
 import path from 'path';
+import { IncomingForm } from 'formidable';
 
 export const config = {
   api: {
@@ -9,31 +9,38 @@ export const config = {
   },
 };
 
-const uploadDir = path.join(process.cwd(), 'public', 'uploads');
-
-async function mkdir(path: string) {
-    try {
-        await fs.access(path);
-    } catch (error) {
-        await fs.mkdir(path, { recursive: true });
-    }
-}
-
-
 export async function POST(request: NextRequest) {
-    await mkdir(uploadDir);
-  const form = formidable({ uploadDir: uploadDir, keepExtensions: true });
+  const uploadDir = path.join(process.cwd(), 'public', 'uploads');
 
-  const [fields, files] = await form.parse(request as any);
+  try {
+    await fs.mkdir(uploadDir, { recursive: true });
+  } catch (error) {
+    console.error('Error creating upload directory:', error);
+    return NextResponse.json({ message: 'Error creating upload directory' }, { status: 500 });
+  }
 
+  const form = new IncomingForm({
+    uploadDir,
+    keepExtensions: true,
+    filename: (name, ext) => {
+      return `${name.replace(/\s/g, '-')}-${Date.now()}${ext}`;
+    },
+  });
+
+  try {
+    const [fields, files] = await form.parse(request as any);
     const file = files.file;
 
     if (!file) {
-        return NextResponse.json({ error: 'No file uploaded.' }, { status: 400 });
+      return NextResponse.json({ message: 'No file uploaded' }, { status: 400 });
     }
 
-    const filepath = (file as any).newFilename;
+    const uploadedFile = file[0];
+    const newFilename = uploadedFile.newFilename;
 
-
-  return NextResponse.json({ filepath: `/uploads/${filepath}` });
+    return NextResponse.json({ message: 'File uploaded successfully', filePath: `/uploads/${newFilename}` });
+  } catch (error) {
+    console.error('Error uploading file:', error);
+    return NextResponse.json({ message: 'Error uploading file' }, { status: 500 });
+  }
 }

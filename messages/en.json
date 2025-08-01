@@ -125,5 +125,10 @@
     "loadingTag": "Loading tag data...",
     "errorFetching": "Error fetching tag data.",
     "errorNotFound": "Tag not found. It might have been deleted."
+  },
+  "MediaPage": {
+    "title": "Media Library",
+    "backLink": "Back to Dashboard",
+    "loading": "Loading media..."
   }
 }

@@ -62,6 +62,9 @@ export default function DashboardPage() {
                 Manage Users
               </Link>
             )}
+            <Link href="/admin/media" className="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded transition-colors">
+              Media Library
+            </Link>
           </div>
         </Card>
       </div>
