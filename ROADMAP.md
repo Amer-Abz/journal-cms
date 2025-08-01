@@ -45,8 +45,8 @@ This document outlines the planned stages and features for the Next.js, Prisma, 
 2.  **Advanced Editor:**
     *   [x] Integrate a rich text editor (e.g., TipTap, Editor.js) with i18n support (RTL for Arabic).
 3.  **SEO Features:**
-    *   [ ] Meta tags management for posts/pages (i18n).
-    *   [ ] Sitemap generation (multi-lingual).
+    *   [x] Meta tags management for posts/pages (i18n).
+    *   [x] Sitemap generation (multi-lingual).
 4.  **Themeing/Customization:**
     *   [ ] Basic theming capabilities or customization options.
 5.  **API for Frontend Consumption:**

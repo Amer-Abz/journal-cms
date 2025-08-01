@@ -14,6 +14,8 @@ const createPostSchema = z.object({
   authorId: z.number(),
   categoryIds: z.array(z.number()).optional(),
   tagIds: z.array(z.number()).optional(),
+  metaTitle: z.string().optional(),
+  metaDescription: z.string().optional(),
 });
 
 export async function POST(request: NextRequest) {
@@ -65,7 +67,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ errors: validation.error.flatten().fieldErrors }, { status: 400 });
       }
 
-      const { title, content, language, published, authorId, categoryIds, tagIds } = validation.data;
+      const { title, content, language, published, authorId, categoryIds, tagIds, metaTitle, metaDescription } = validation.data;
       const slug = generateSlug(title);
 
       const post = await prisma.post.create({
@@ -76,6 +78,8 @@ export async function POST(request: NextRequest) {
           language,
           published,
           authorId,
+          metaTitle,
+          metaDescription,
           categories: {
             connect: categoryIds?.map(id => ({ id })),
           },

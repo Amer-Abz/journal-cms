@@ -16,6 +16,8 @@ interface PostFormState {
   customFields: Record<string, any>;
   categoryIds: number[];
   tagIds: number[];
+  metaTitle: string;
+  metaDescription: string;
 }
 
 interface ApiError {
@@ -36,6 +38,10 @@ export default function NewPostPage() {
     published: false,
     categoryIds: [],
     tagIds: [],
+    metaTitle: '',
+    metaDescription: '',
+    postTypeId: null,
+    customFields: {},
   });
   const [categories, setCategories] = useState<{ id: number; name: string }[]>([]);
   const [tags, setTags] = useState<{ id: number; name: string }[]>([]);
@@ -127,6 +133,30 @@ export default function NewPostPage() {
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
           {error?.errors?.title && <p className="text-red-500 text-xs mt-1">{error.errors.title.join(', ')}</p>}
+        </div>
+
+        <div>
+          <label htmlFor="metaTitle" className="block text-sm font-medium text-gray-700">{t('fieldMetaTitle')}</label>
+          <input
+            type="text"
+            name="metaTitle"
+            id="metaTitle"
+            value={formState.metaTitle}
+            onChange={handleChange}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="metaDescription" className="block text-sm font-medium text-gray-700">{t('fieldMetaDescription')}</label>
+          <textarea
+            name="metaDescription"
+            id="metaDescription"
+            value={formState.metaDescription}
+            onChange={handleChange}
+            rows={3}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          />
         </div>
 
         <div>

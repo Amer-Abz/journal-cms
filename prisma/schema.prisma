@@ -22,6 +22,8 @@ model Post {
   featuredImage String?
   language  String   // To store language code e.g., "en", "ar"
   published Boolean  @default(false)
+  metaTitle       String?
+  metaDescription String?
   author    User     @relation(fields: [authorId], references: [id])
   authorId  Int
   postType  PostType @relation(fields: [postTypeId], references: [id])

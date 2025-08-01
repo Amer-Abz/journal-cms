@@ -15,6 +15,8 @@ const updatePostSchema = z.object({
   published: z.boolean().optional(),
   categoryIds: z.array(z.number()).optional(),
   tagIds: z.array(z.number()).optional(),
+  metaTitle: z.string().optional(),
+  metaDescription: z.string().optional(),
 });
 
 export async function POST(
@@ -75,9 +77,9 @@ export async function PUT(
         return NextResponse.json({ message: "No fields to update" }, { status: 400 });
     }
 
-    const { title, content, published, categoryIds, tagIds } = validation.data;
+    const { title, content, published, categoryIds, tagIds, metaTitle, metaDescription } = validation.data;
 
-    const data: { title?: string; content?: string; published?: boolean; slug?: string, categories?: any, tags?: any } = { title, content, published };
+    const data: { title?: string; content?: string; published?: boolean; slug?: string, categories?: any, tags?: any, metaTitle?: string, metaDescription?: string } = { title, content, published, metaTitle, metaDescription };
 
     if (title) {
         data.slug = generateSlug(title);
