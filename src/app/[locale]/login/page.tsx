@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 
 export default function LoginPage() {
   const t = useTranslations('LoginPage');
@@ -67,6 +68,12 @@ export default function LoginPage() {
               </button>
             </div>
           </form>
+          <p className="mt-4 text-center text-sm text-gray-600">
+            Don't have an account?{' '}
+            <Link href="/register" className="font-medium text-indigo-600 hover:text-indigo-500">
+              Sign up
+            </Link>
+          </p>
         </div>
       </div>
     </div>
