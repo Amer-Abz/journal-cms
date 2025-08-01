@@ -37,35 +37,38 @@ export default function SettingsPage() {
     fetchSettings();
   }, []);
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const [primaryColor, setPrimaryColor] = useState('#000000');
+  const [secondaryColor, setSecondaryColor] = useState('#ffffff');
+
+  useEffect(() => {
+    const primary = settings.find((s) => s.key === 'primaryColor');
+    if (primary) setPrimaryColor(primary.value);
+    const secondary = settings.find((s) => s.key === 'secondaryColor');
+    if (secondary) setSecondaryColor(secondary.value);
+  }, [settings]);
+
+  const handleThemeSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const key = formData.get('key') as string;
-    const value = formData.get('value') as string;
+
+    const settingsToUpdate = [
+      { key: 'primaryColor', value: primaryColor },
+      { key: 'secondaryColor', value: secondaryColor },
+    ];
 
     try {
       const response = await fetch('/api/settings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ key, value }),
+        body: JSON.stringify(settingsToUpdate),
       });
 
       if (!response.ok) {
         const data = await response.json();
-        throw new Error(data.message || 'Failed to save setting');
+        throw new Error(data.message || 'Failed to save settings');
       }
 
-      const newSetting = await response.json();
-      setSettings((prevSettings) => {
-        const existingSettingIndex = prevSettings.findIndex((s) => s.key === newSetting.key);
-        if (existingSettingIndex > -1) {
-          const updatedSettings = [...prevSettings];
-          updatedSettings[existingSettingIndex] = newSetting;
-          return updatedSettings;
-        } else {
-          return [...prevSettings, newSetting];
-        }
-      });
+      const newSettings = await response.json();
+      setSettings(newSettings);
     } catch (error: any) {
       setError(error.message);
     }
@@ -97,26 +100,28 @@ export default function SettingsPage() {
         </div>
 
         <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-bold mb-4">{t('newSetting')}</h2>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <h2 className="text-xl font-bold mb-4">{t('themeSettings')}</h2>
+          <form onSubmit={handleThemeSubmit} className="space-y-4">
             <div>
-              <label htmlFor="key" className="block text-sm font-medium text-gray-700">{t('keyLabel')}</label>
+              <label htmlFor="primaryColor" className="block text-sm font-medium text-gray-700">{t('primaryColorLabel')}</label>
               <input
-                type="text"
-                name="key"
-                id="key"
-                required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                type="color"
+                name="primaryColor"
+                id="primaryColor"
+                value={primaryColor}
+                onChange={(e) => setPrimaryColor(e.target.value)}
+                className="mt-1 block w-full h-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
             <div>
-              <label htmlFor="value" className="block text-sm font-medium text-gray-700">{t('valueLabel')}</label>
+              <label htmlFor="secondaryColor" className="block text-sm font-medium text-gray-700">{t('secondaryColorLabel')}</label>
               <input
-                type="text"
-                name="value"
-                id="value"
-                required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                type="color"
+                name="secondaryColor"
+                id="secondaryColor"
+                value={secondaryColor}
+                onChange={(e) => setSecondaryColor(e.target.value)}
+                className="mt-1 block w-full h-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
             <button

@@ -2,6 +2,7 @@ import {NextIntlClientProvider} from 'next-intl';
 import {getMessages} from 'next-intl/server';
 import { Inter } from "next/font/google"; // Assuming this is still wanted from default setup
 import Providers from '@/components/Providers'; // Import the new Providers component
+import prisma from '@/lib/prisma';
 
 // If you have a global CSS file, import it here.
 import '../globals.css'; // Adjusted path
@@ -12,6 +13,16 @@ export default async function LocaleLayout(props: {
   children: React.ReactNode;
   params: {locale: string};
 }) {
+  const settings = await prisma.setting.findMany();
+  const primaryColor = settings.find((s) => s.key === 'primaryColor')?.value || '#3b82f6';
+  const secondaryColor = settings.find((s) => s.key === 'secondaryColor')?.value || '#f3f4f6';
+
+  const themeStyles = `
+    :root {
+      --primary-color: ${primaryColor};
+      --secondary-color: ${secondaryColor};
+    }
+  `;
   const { children, params } = props;
   const locale = params.locale; // Destructure inside
 
@@ -21,6 +32,9 @@ export default async function LocaleLayout(props: {
 
   return (
     <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+      <head>
+        <style dangerouslySetInnerHTML={{ __html: themeStyles }} />
+      </head>
       <body className={inter.className}>
         <Providers>
           <NextIntlClientProvider messages={messages}>

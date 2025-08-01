@@ -23,21 +23,42 @@ export async function POST(request: NextRequest) {
 
   try {
     const body = await request.json();
-    const validation = settingSchema.safeParse(body);
 
-    if (!validation.success) {
-      return NextResponse.json({ errors: validation.error.flatten().fieldErrors }, { status: 400 });
+    if (Array.isArray(body)) {
+      const settingsSchema = z.array(settingSchema);
+      const validation = settingsSchema.safeParse(body);
+
+      if (!validation.success) {
+        return NextResponse.json({ errors: validation.error.flatten().fieldErrors }, { status: 400 });
+      }
+
+      for (const setting of validation.data) {
+        await prisma.setting.upsert({
+          where: { key: setting.key },
+          update: { value: setting.value },
+          create: { key: setting.key, value: setting.value },
+        });
+      }
+
+      const settings = await prisma.setting.findMany();
+      return NextResponse.json(settings, { status: 201 });
+    } else {
+      const validation = settingSchema.safeParse(body);
+
+      if (!validation.success) {
+        return NextResponse.json({ errors: validation.error.flatten().fieldErrors }, { status: 400 });
+      }
+
+      const { key, value } = validation.data;
+
+      const setting = await prisma.setting.upsert({
+        where: { key },
+        update: { value },
+        create: { key, value },
+      });
+
+      return NextResponse.json(setting, { status: 201 });
     }
-
-    const { key, value } = validation.data;
-
-    const setting = await prisma.setting.upsert({
-      where: { key },
-      update: { value },
-      create: { key, value },
-    });
-
-    return NextResponse.json(setting, { status: 201 });
   } catch (error) {
     console.error('Error creating/updating setting:', error);
     return NextResponse.json({ message: 'Error creating/updating setting' }, { status: 500 });

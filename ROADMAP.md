@@ -48,7 +48,7 @@ This document outlines the planned stages and features for the Next.js, Prisma, 
     *   [x] Meta tags management for posts/pages (i18n).
     *   [x] Sitemap generation (multi-lingual).
 4.  **Themeing/Customization:**
-    *   [ ] Basic theming capabilities or customization options.
+    *   [x] Basic theming capabilities or customization options.
 5.  **API for Frontend Consumption:**
     *   [ ] Public API endpoints for fetching content to be displayed on a separate frontend (supporting language parameter).
 
