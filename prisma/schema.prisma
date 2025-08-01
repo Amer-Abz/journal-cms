@@ -24,6 +24,9 @@ model Post {
   published Boolean  @default(false)
   author    User     @relation(fields: [authorId], references: [id])
   authorId  Int
+  postType  PostType @relation(fields: [postTypeId], references: [id])
+  postTypeId Int
+  customFields Json?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -50,6 +53,16 @@ model Category {
   id    Int     @id @default(autoincrement())
   name  String  @unique
   posts Post[]
+}
+
+model PostType {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  slug      String   @unique
+  fields    Json
+  posts     Post[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Setting {

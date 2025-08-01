@@ -35,8 +35,8 @@ This document outlines the planned stages and features for the Next.js, Prisma, 
     *   [x] Differentiate between Admin, Editor, Author roles.
     *   [x] Implement basic role-based access control (RBAC).
 4.  **Settings Management:**
-    *   [ ] Basic site settings (e.g., site title, description - with i18n).
-    *   [ ] UI for managing settings.
+    *   [x] Basic site settings (e.g., site title, description - with i18n).
+    *   [x] UI for managing settings.
 
 ## Phase 3: Advanced Features & Polish
 

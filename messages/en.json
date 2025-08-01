@@ -140,5 +140,15 @@
     "keyLabel": "Key",
     "valueLabel": "Value",
     "saveButton": "Save Setting"
+  },
+  "PostTypesPage": {
+    "title": "Post Types",
+    "backLink": "Back to Dashboard",
+    "loading": "Loading post types...",
+    "currentPostTypes": "Current Post Types",
+    "newPostType": "Add New Post Type",
+    "nameLabel": "Name",
+    "fieldsLabel": "Fields (JSON)",
+    "saveButton": "Save Post Type"
   }
 }

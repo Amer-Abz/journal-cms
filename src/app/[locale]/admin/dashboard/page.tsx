@@ -72,6 +72,11 @@ export default function DashboardPage() {
                 Settings
               </Link>
             )}
+            {userRole === 'ADMIN' && (
+              <Link href="/admin/post-types" className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded transition-colors">
+                Post Types
+              </Link>
+            )}
           </div>
         </Card>
       </div>

@@ -140,5 +140,15 @@
     "keyLabel": "المفتاح",
     "valueLabel": "القيمة",
     "saveButton": "حفظ الإعداد"
+  },
+  "PostTypesPage": {
+    "title": "أنواع المنشورات",
+    "backLink": "العودة إلى لوحة التحكم",
+    "loading": "جاري تحميل أنواع المنشورات...",
+    "currentPostTypes": "أنواع المنشورات الحالية",
+    "newPostType": "إضافة نوع منشور جديد",
+    "nameLabel": "الاسم",
+    "fieldsLabel": "الحقول (JSON)",
+    "saveButton": "حفظ نوع المنشور"
   }
 }
