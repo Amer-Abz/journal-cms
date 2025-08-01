@@ -32,8 +32,8 @@ This document outlines the planned stages and features for the Next.js, Prisma, 
     *   [x] Associate images with Posts.
     *   [x] Simple media browsing interface.
 3.  **User Roles & Permissions:**
-    *   [ ] Differentiate between Admin, Editor, Author roles.
-    *   [ ] Implement basic role-based access control (RBAC).
+    *   [x] Differentiate between Admin, Editor, Author roles.
+    *   [x] Implement basic role-based access control (RBAC).
 4.  **Settings Management:**
     *   [ ] Basic site settings (e.g., site title, description - with i18n).
     *   [ ] UI for managing settings.

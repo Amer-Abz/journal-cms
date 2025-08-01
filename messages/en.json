@@ -130,5 +130,15 @@
     "title": "Media Library",
     "backLink": "Back to Dashboard",
     "loading": "Loading media..."
+  },
+  "SettingsPage": {
+    "title": "Site Settings",
+    "backLink": "Back to Dashboard",
+    "loading": "Loading settings...",
+    "currentSettings": "Current Settings",
+    "newSetting": "Add/Update Setting",
+    "keyLabel": "Key",
+    "valueLabel": "Value",
+    "saveButton": "Save Setting"
   }
 }
