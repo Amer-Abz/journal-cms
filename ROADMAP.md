@@ -50,7 +50,7 @@ This document outlines the planned stages and features for the Next.js, Prisma, 
 4.  **Themeing/Customization:**
     *   [x] Basic theming capabilities or customization options.
 5.  **API for Frontend Consumption:**
-    *   [ ] Public API endpoints for fetching content to be displayed on a separate frontend (supporting language parameter).
+    *   [x] Public API endpoints for fetching content to be displayed on a separate frontend (supporting language parameter).
 
 ## Phase 4: Deployment & Maintenance
 
