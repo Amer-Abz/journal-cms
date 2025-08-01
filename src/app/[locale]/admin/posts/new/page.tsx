@@ -11,6 +11,8 @@ interface PostFormState {
   featuredImage: string;
   language: string; // Should default to current locale
   published: boolean;
+  postTypeId: number | null;
+  customFields: Record<string, any>;
   categoryIds: number[];
   tagIds: number[];
 }
@@ -36,27 +38,31 @@ export default function NewPostPage() {
   });
   const [categories, setCategories] = useState<{ id: number; name: string }[]>([]);
   const [tags, setTags] = useState<{ id: number; name: string }[]>([]);
+  const [postTypes, setPostTypes] = useState<{ id: number; name: string; fields: any }[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<ApiError | null>(null);
 
   useEffect(() => {
-    const fetchCategoriesAndTags = async () => {
+    const fetchData = async () => {
       try {
-        const [catRes, tagRes] = await Promise.all([
+        const [catRes, tagRes, postTypeRes] = await Promise.all([
           fetch('/api/categories'),
           fetch('/api/tags'),
+          fetch('/api/post-types'),
         ]);
-        const [catData, tagData] = await Promise.all([
+        const [catData, tagData, postTypeData] = await Promise.all([
           catRes.json(),
           tagRes.json(),
+          postTypeRes.json(),
         ]);
         setCategories(catData);
         setTags(tagData);
+        setPostTypes(postTypeData);
       } catch (error) {
-        console.error("Failed to fetch categories or tags", error);
+        console.error("Failed to fetch data", error);
       }
     };
-    fetchCategoriesAndTags();
+    fetchData();
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -136,6 +142,38 @@ export default function NewPostPage() {
         </div>
 
         <ImageUpload onUpload={(filepath) => setFormState(prev => ({ ...prev, featuredImage: filepath }))} />
+
+        <div>
+          <label htmlFor="postTypeId" className="block text-sm font-medium text-gray-700">Post Type</label>
+          <select
+            name="postTypeId"
+            id="postTypeId"
+            value={formState.postTypeId || ''}
+            onChange={(e) => setFormState(prev => ({ ...prev, postTypeId: parseInt(e.target.value) }))}
+            required
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white"
+          >
+            <option value="">Select a post type</option>
+            {postTypes.map(postType => (
+              <option key={postType.id} value={postType.id}>{postType.name}</option>
+            ))}
+          </select>
+        </div>
+
+        {formState.postTypeId && postTypes.find(pt => pt.id === formState.postTypeId)?.fields && (
+          Object.entries(postTypes.find(pt => pt.id === formState.postTypeId)!.fields).map(([key, type]) => (
+            <div key={key}>
+              <label htmlFor={key} className="block text-sm font-medium text-gray-700">{key}</label>
+              <input
+                type={type as string}
+                name={key}
+                id={key}
+                onChange={(e) => setFormState(prev => ({ ...prev, customFields: { ...prev.customFields, [key]: e.target.value } }))}
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              />
+            </div>
+          ))
+        )}
 
         <div>
           <label htmlFor="language" className="block text-sm font-medium text-gray-700">{t('fieldLanguage')}</label>
