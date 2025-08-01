@@ -49,9 +49,11 @@ export default function DashboardPage() {
 
         <Card title="Quick Actions" className="md:col-span-2 lg:col-span-3">
           <div className="flex flex-wrap gap-4">
-            <Link href="/admin/posts/new" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition-colors">
-              New Post
-            </Link>
+            {['ADMIN', 'EDITOR', 'AUTHOR'].includes(userRole || '') && (
+              <Link href="/admin/posts/new" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition-colors">
+                New Post
+              </Link>
+            )}
             {(userRole === 'ADMIN' || userRole === 'EDITOR') && (
               <Link href="/admin/categories/new" className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition-colors">
                 New Category

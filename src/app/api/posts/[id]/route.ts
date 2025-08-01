@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { z } from 'zod';
 import { generateSlug } from '@/lib/utils';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 
 // Zod schema for post update (all fields optional)
 const updatePostSchema = z.object({
@@ -19,6 +21,12 @@ export async function POST(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  const session = await getServerSession(authOptions);
+
+  if (!session || !session.user || !['ADMIN', 'EDITOR'].includes(session.user.role)) {
+    return NextResponse.json({ message: 'Forbidden' }, { status: 403 });
+  }
+
   try {
     const id = parseInt(params.id, 10);
     if (isNaN(id)) {
@@ -43,6 +51,12 @@ export async function PUT(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  const session = await getServerSession(authOptions);
+
+  if (!session || !session.user || !['ADMIN', 'EDITOR'].includes(session.user.role)) {
+    return NextResponse.json({ message: 'Forbidden' }, { status: 403 });
+  }
+
   try {
     const id = parseInt(params.id, 10);
     if (isNaN(id)) {

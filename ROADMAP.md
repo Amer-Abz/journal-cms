@@ -28,9 +28,9 @@ This document outlines the planned stages and features for the Next.js, Prisma, 
     *   [x] Implement UI for managing Categories and Tags.
     *   [x] Filter posts by Category/Tag.
 2.  **Media Library:**
-    *   [ ] Basic image upload functionality.
-    *   [ ] Associate images with Posts.
-    *   [ ] Simple media browsing interface.
+    *   [x] Basic image upload functionality.
+    *   [x] Associate images with Posts.
+    *   [x] Simple media browsing interface.
 3.  **User Roles & Permissions:**
     *   [ ] Differentiate between Admin, Editor, Author roles.
     *   [ ] Implement basic role-based access control (RBAC).

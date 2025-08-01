@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { z } from 'zod';
 import { generateSlug } from '@/lib/utils';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 
 // Zod schema for post creation
 const createPostSchema = z.object({
@@ -51,6 +53,12 @@ export async function POST(request: NextRequest) {
       });
       return NextResponse.json(posts);
     } else {
+      const session = await getServerSession(authOptions);
+
+      if (!session || !session.user || !['ADMIN', 'EDITOR', 'AUTHOR'].includes(session.user.role)) {
+        return NextResponse.json({ message: 'Forbidden' }, { status: 403 });
+      }
+
       const validation = createPostSchema.safeParse(body);
 
       if (!validation.success) {
