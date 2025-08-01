@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
 export default function LoginPage() {
-  const t = useTranslations('LoginPage');
+  const t = useTranslations('Auth');
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -33,7 +33,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center items-center p-4">
       <div className="max-w-md w-full mx-auto">
-        <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">{t('title')}</h1>
+        <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">{t('loginTitle')}</h1>
         <div className="bg-white p-8 rounded-lg shadow-lg">
           <form onSubmit={handleSubmit} className="space-y-6">
             {error && <p className="text-red-500 text-center bg-red-100 p-3 rounded-md">{error}</p>}

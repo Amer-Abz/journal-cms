@@ -1,4 +1,8 @@
 {
+  "HomePage": {
+    "title": "Login",
+    "description": "Please log in to continue."
+  },
   "DashboardPage": {
     "title": "Dashboard",
     "welcomeMessage": "Welcome to your dashboard!"
@@ -51,19 +55,15 @@
     "errorNotFound": "Post not found. It might have been deleted.",
     "errorUpdating": "Error updating post. Please check the fields."
   },
-  "LoginPage": {
-    "title": "Login",
+  "Auth": {
+    "loginTitle": "Login",
+    "registerTitle": "Register",
     "fieldEmail": "Email",
     "fieldPassword": "Password",
-    "buttonLogin": "Login",
-    "invalidCredentials": "Invalid email or password."
-  },
-  "RegisterPage": {
-    "title": "Register",
     "fieldName": "Name",
-    "fieldEmail": "Email",
-    "fieldPassword": "Password",
+    "buttonLogin": "Login",
     "buttonRegister": "Register",
+    "invalidCredentials": "Invalid email or password.",
     "registrationFailed": "Registration failed. Please try again."
   },
   "AdminCategoriesPage": {

@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
 export default function RegisterPage() {
-  const t = useTranslations('RegisterPage');
+  const t = useTranslations('Auth');
   const router = useRouter();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -28,7 +28,7 @@ export default function RegisterPage() {
         const data = await response.json();
         setError(data.message || t('registrationFailed'));
       } else {
-        router.push('/login');
+        router.push('/');
       }
     } catch (error) {
       setError(t('registrationFailed'));
@@ -38,7 +38,7 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center items-center p-4">
       <div className="max-w-md w-full mx-auto">
-        <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">{t('title')}</h1>
+        <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">{t('registerTitle')}</h1>
         <div className="bg-white p-8 rounded-lg shadow-lg">
           <form onSubmit={handleSubmit} className="space-y-6">
             {error && <p className="text-red-500 text-center bg-red-100 p-3 rounded-md">{error}</p>}
@@ -86,7 +86,7 @@ export default function RegisterPage() {
           </form>
           <p className="mt-4 text-center text-sm text-gray-600">
             Already have an account?{' '}
-            <Link href="/login" className="font-medium text-indigo-600 hover:text-indigo-500">
+            <Link href="/" className="font-medium text-indigo-600 hover:text-indigo-500">
               Log in
             </Link>
           </p>

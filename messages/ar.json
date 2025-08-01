@@ -1,4 +1,8 @@
 {
+  "HomePage": {
+    "title": "تسجيل الدخول",
+    "description": "يرجى تسجيل الدخول للمتابعة."
+  },
   "DashboardPage": {
     "title": "لوحة التحكم",
     "welcomeMessage": "مرحباً بك في لوحة التحكم الخاصة بك!"
@@ -51,19 +55,15 @@
     "errorNotFound": "المقال غير موجود. ربما تم حذفه.",
     "errorUpdating": "خطأ في تحديث المقال. يرجى التحقق من الحقول."
   },
-  "LoginPage": {
-    "title": "تسجيل الدخول",
+  "Auth": {
+    "loginTitle": "تسجيل الدخول",
+    "registerTitle": "تسجيل",
     "fieldEmail": "البريد الإلكتروني",
     "fieldPassword": "كلمة المرور",
-    "buttonLogin": "تسجيل الدخول",
-    "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة."
-  },
-  "RegisterPage": {
-    "title": "تسجيل",
     "fieldName": "الاسم",
-    "fieldEmail": "البريد الإلكتروني",
-    "fieldPassword": "كلمة المرور",
+    "buttonLogin": "تسجيل الدخول",
     "buttonRegister": "تسجيل",
+    "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
     "registrationFailed": "فشل التسجيل. يرجى المحاولة مرة أخرى."
   },
   "AdminCategoriesPage": {
